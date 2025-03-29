@@ -4,9 +4,37 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;}
+    box-sizing: border-box;
+
+}
 
     
     .main-back{
-        background-color: #1d1d1d;
+        background-color: #151515;
     }
+
+
+    .scroll-container {
+        overflow: auto;
+        max-height: 300px; /* Altura máxima para activar el scroll */
+    }
+
+    /* Personalizar el scrollbar */
+::-webkit-scrollbar {
+    width: 6px; /* Ancho del scrollbar */
+    height: 6px; /* Alto del scrollbar (para scroll horizontal) */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #555; /* Color del "thumb" (barra de desplazamiento) */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #888; /* Color del "thumb" al pasar el mouse */
+}
+
+::-webkit-scrollbar-track {
+    background: #1d1d1d; /* Color del fondo del scrollbar */
+    border-radius: 4px; /* Bordes redondeados */
+}
