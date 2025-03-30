@@ -52,7 +52,7 @@ const songsList = [
         author: "Ariana Grande",
         title: "the boy is mine",
         duration: "2:58",
-        album: "Lover",
+        album: "eternal sunshine",
         src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
     {
@@ -60,7 +60,7 @@ const songsList = [
         author: "Ariana Grande",
         title: "yes, and?",
         duration: "3:19",
-        album: "BE",
+        album: "eternal sunshine",
         src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
     {
@@ -68,7 +68,7 @@ const songsList = [
         author: "Ariana Grande",
         title: "we can't be friends (wait for your love)",
         duration: "3:35",
-        album: "Hollywood's Bleeding",
+        album: "eternal sunshine",
         src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
     {
@@ -76,7 +76,7 @@ const songsList = [
         author: "Ariana Grande",
         title: "i wish i hated you",
         duration: "4:02",
-        album: "SOUR",
+        album: "eternal sunshine",
         src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
     {
@@ -84,7 +84,7 @@ const songsList = [
         author: "Ariana Grande",
         title: "imperfect for you",
         duration: "4:02",
-        album: "An Evening with Silk Sonic",
+        album: "eternal sunshine",
         src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
     {
@@ -92,7 +92,7 @@ const songsList = [
         author: "Ariana Grande",
         title: "Hampstead",
         duration: "3:29",
-        album: "Planet Her",
+        album: "eternal sunshine",
         src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
 ]
