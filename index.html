@@ -6,6 +6,7 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <link rel="stylesheet" href="/styles/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Vite App</title>
 </head>
 
@@ -22,11 +23,24 @@
         </article>
         <article class="grid content-start gap-4">
           <div class="grid gap-1">
-            <p class="text-gray-300 text-3xl font-bold">Brighter Days Ahead</p>
-            <p class="text-gray-300 text-lg font-medium">Brighter Days Ahead</p>
+            <p id="album-title" class="text-gray-300 text-3xl font-bold">Brighter Days Ahead</p>
+            <p id="song-title" class="text-gray-300 text-lg font-medium">Brighter Days Ahead</p>
           </div>
-          <p class="text-gray-300 text-sm">Ariana Grande</p>
+          <p id="artist-name" class="text-gray-300 text-sm">Ariana Grande</p>
+
+          <div class="flex gap-3">
+            <img id="previous-button" src="./src/assets/icons/back_track.svg" class="w-10 h-10 cursor-pointer"
+              alt="Pause icon">
+
+            <img id="play-button" src="./src/assets/icons/play.svg" class="w-10 h-10 cursor-pointer" alt="Pause icon">
+            <img id="next-button" src="./src/assets/icons/next_track.svg" class="w-10 h-10 cursor-pointer"
+              alt="Pause icon">
+
+          </div>
+
         </article>
+
+
       </section>
 
       <!-- list of songs -->
@@ -79,6 +93,7 @@
 
 
   <script type="module" src="/src/main.js"></script>
+
 </body>
 
 </html>
