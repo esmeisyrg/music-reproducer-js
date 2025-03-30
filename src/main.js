@@ -1,3 +1,6 @@
+import imagePause from "./assets/icons/pause_track.svg";
+import imagePlay from "./assets/icons/play.svg";
+
 const songsList = [
     {
         id: 0,
@@ -103,12 +106,9 @@ const artistName = document.getElementById("artist-name");
 const albumTitle = document.getElementById("album-title");
 
 const audio = new Audio();
-const currentSong = 0;
 let currentSongIndex = 0;
-const currentSongDuration = 0;
 const previousButton = document.getElementById("previous-button");
 const nextButton = document.getElementById("next-button");
-// const selectSong = document.querySelectorAll(".song-square");
 
 
 musicPlaylist.innerHTML = songsList.map((music, index) => {
@@ -147,10 +147,12 @@ function changeSong(index){
 
 playButton.addEventListener("click", () => {
     if (audio.paused){
-    playSong(currentSongIndex);
-    changeSong(currentSongIndex);
+        playSong(currentSongIndex);
+        changeSong(currentSongIndex);
+        playButton.src = imagePause; 
     } else {
         audio.pause();
+        playButton.src = imagePlay;
     }
 });
 
@@ -186,13 +188,3 @@ musicPlaylist.addEventListener("click", (e) =>{
     article.classList.add("bg-gray-700");
 
 })
-
-
-// const selectSong = document.querySelector(".song-item").forEach(article => {
-//     article.addEventListener("click" () =>{})
-    
-// });
-// selectSong.addEventListener("click", ()=>{
-//     playSong(currentSongIndex);
-//     selectSong.classList.add("bg-gray-300 cursor-pointer");
-// })
