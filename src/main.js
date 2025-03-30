@@ -2,116 +2,197 @@ const songsList = [
     {
         id: 0,
         author: "Ariana Grande",
-        title: "7 Rings",
-        duration: "3:05",
-        album: "Thank U, Next",
-        src: "",
+        title: "intro (end of the world)",
+        duration: "1:32",
+        album: "eternal sunshine",
+        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
     {
         id: 1,
         author: "Ariana Grande",
-        title: "bye bye",
-        duration: "3:05",
-        album: "Thank U, Next",
-        src: "",
+        title: "bye",
+        duration: "2:44",
+        album: "eternal Sunshine",
+        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/in-the-zone.mp3",
     },
     {
         id: 2,
-        author: "The Weeknd",
-        title: "Blinding Lights",
-        duration: "3:22",
-        album: "After Hours",
-        src: "",
+        author: "Ariana Grande",
+        title: "don't wanna break up again",
+        duration: "2:54",
+        album: "eternal Sunshine",
+        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/camper-cat.mp3",
     },
     {
         id: 3,
-        author: "Dua Lipa",
-        title: "Levitating",
-        duration: "3:23",
-        album: "Future Nostalgia",
-        src: "",
+        author: "Ariana Grande",
+        title: "eternal sunshine",
+        duration: "3:30",
+        album: "eternal sunshine",
+        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/electronic.mp3",
     },
     {
         id: 4,
-        author: "Billie Eilish",
-        title: "bad guy",
-        duration: "3:14",
-        album: "WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?",
-        src: "",
+        author: "Ariana Grande",
+        title: "supernatural",
+        duration: "3:03",
+        album: "eternal sunshine",
+        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/sailing-away.mp3",
     },
     {
         id: 5,
-        author: "Harry Styles",
-        title: "Watermelon Sugar",
-        duration: "2:54",
-        album: "Fine Line",
-        src: "",
+        author: "Ariana Grande",
+        title: "true story",
+        duration: "3:51",
+        album: "eternal sunshine",
+        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
     {
         id: 6,
-        author: "Taylor Swift",
-        title: "Cruel Summer",
+        author: "Ariana Grande",
+        title: "the boy is mine",
         duration: "2:58",
-        album: "Lover",
-        src: "",
+        album: "eternal sunshine",
+        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
     {
         id: 7,
-        author: "BTS",
-        title: "Dynamite",
+        author: "Ariana Grande",
+        title: "yes, and?",
         duration: "3:19",
-        album: "BE",
-        src: "",
+        album: "eternal sunshine",
+        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
     {
         id: 8,
-        author: "Post Malone",
-        title: "Circles",
+        author: "Ariana Grande",
+        title: "we can't be friends (wait for your love)",
         duration: "3:35",
-        album: "Hollywood's Bleeding",
-        src: "",
+        album: "eternal sunshine",
+        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
     {
         id: 9,
-        author: "Olivia Rodrigo",
-        title: "drivers license",
+        author: "Ariana Grande",
+        title: "i wish i hated you",
         duration: "4:02",
-        album: "SOUR",
-        src: "",
+        album: "eternal sunshine",
+        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
     {
         id: 10,
-        author: "Bruno Mars",
-        title: "Leave The Door Open",
+        author: "Ariana Grande",
+        title: "imperfect for you",
         duration: "4:02",
-        album: "An Evening with Silk Sonic",
-        src: "",
+        album: "eternal sunshine",
+        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
     {
         id: 11,
-        author: "Doja Cat",
-        title: "Kiss Me More",
+        author: "Ariana Grande",
+        title: "Hampstead",
         duration: "3:29",
-        album: "Planet Her",
-        src: "",
+        album: "eternal sunshine",
+        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
     },
 ]
-
+const playButton = document.getElementById("play-button");
 const musicPlaylist = document.getElementById("playlist");
-const audio = new Audio();
+const songTitle = document.getElementById("song-title");
+const artistName = document.getElementById("artist-name");
+const albumTitle = document.getElementById("album-title");
 
-musicPlaylist.innerHTML = songsList.map(music => {
+const audio = new Audio();
+const currentSong = 0;
+let currentSongIndex = 0;
+const currentSongDuration = 0;
+const previousButton = document.getElementById("previous-button");
+const nextButton = document.getElementById("next-button");
+// const selectSong = document.querySelectorAll(".song-square");
+
+
+musicPlaylist.innerHTML = songsList.map((music, index) => {
     return `
        <hr class="border-gray-300">
-        <article class="flex justify-start align-top gap-2">
+        <article class="song-item flex justify-start align-top gap-2 cursor-pointer hover:bg-gray-700" data-index="${index}">
           <div>
             <p class="text-lg font-semibold text-gray-300">${music.id}</p>
           </div>
           <div>
-            <p class="text-base font-semibold text-gray-300">${music.song}</p>
+            <p class="text-base font-semibold text-gray-300">${music.title}</p>
             <p class="text-sm font-mono text-gray-300">${music.author}</p>
           </div>
+          
+          <div class="flex-1"></div>
+                      <p class="text-sm font-mono text-gray-300">${music.duration}</p>
+
         </article>
     `;
+}).join("");
+
+
+
+
+function playSong(index){
+    audio.src = songsList[index].src;
+    audio.play();
+}
+
+
+function changeSong(index){
+    songTitle.innerText = songsList[index].title;
+    artistName.innerText = songsList[index].author;
+    albumTitle.innerText = songsList[index].album;
+}
+
+playButton.addEventListener("click", () => {
+    if (audio.paused){
+    playSong(currentSongIndex);
+    changeSong(currentSongIndex);
+    } else {
+        audio.pause();
+    }
+});
+
+previousButton.addEventListener("click", () => {
+    if (currentSongIndex > 0){
+        currentSongIndex--;
+        playSong(currentSongIndex);
+        changeSong(currentSongIndex);
+
+    }
+});
+
+nextButton.addEventListener("click", () => {
+    if (currentSongIndex < songsList.length - 1){
+        currentSongIndex++;
+        playSong(currentSongIndex);
+        changeSong(currentSongIndex);
+
+    }
+});
+
+musicPlaylist.addEventListener("click", (e) =>{
+    const article = e.target.closest(".song-item");
+
+    if (!article) return;
+
+    currentSongIndex = parseInt(article.dataset.index);
+    playSong(currentSongIndex);
+    changeSong(currentSongIndex);
+
+
+    document.querySelectorAll(".song-item").forEach((song) => song.classList.remove("bg-gray-700"));
+    article.classList.add("bg-gray-700");
+
 })
 
+
+// const selectSong = document.querySelector(".song-item").forEach(article => {
+//     article.addEventListener("click" () =>{})
+    
+// });
+// selectSong.addEventListener("click", ()=>{
+//     playSong(currentSongIndex);
+//     selectSong.classList.add("bg-gray-300 cursor-pointer");
+// })
