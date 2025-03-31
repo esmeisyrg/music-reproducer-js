@@ -1,120 +1,48 @@
 import imagePause from "./assets/icons/pause_track.svg";
 import imagePlay from "./assets/icons/play.svg";
 import trashIcon from "./assets/icons/trash_icons.svg";
+import illustration from "./assets/icons/meditation.svg";
+import { songsList } from "./songsList";
 
-const songsList = [
-    {
-        id: 0,
-        author: "Ariana Grande",
-        title: "intro (end of the world)",
-        duration: "1:32",
-        album: "eternal sunshine",
-        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
-    },
-    {
-        id: 1,
-        author: "Ariana Grande",
-        title: "bye",
-        duration: "2:44",
-        album: "eternal Sunshine",
-        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/in-the-zone.mp3",
-    },
-    {
-        id: 2,
-        author: "Ariana Grande",
-        title: "don't wanna break up again",
-        duration: "2:54",
-        album: "eternal Sunshine",
-        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/camper-cat.mp3",
-    },
-    {
-        id: 3,
-        author: "Ariana Grande",
-        title: "eternal sunshine",
-        duration: "3:30",
-        album: "eternal sunshine",
-        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/electronic.mp3",
-    },
-    {
-        id: 4,
-        author: "Ariana Grande",
-        title: "supernatural",
-        duration: "3:03",
-        album: "eternal sunshine",
-        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/sailing-away.mp3",
-    },
-    {
-        id: 5,
-        author: "Ariana Grande",
-        title: "true story",
-        duration: "3:51",
-        album: "eternal sunshine",
-        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
-    },
-    {
-        id: 6,
-        author: "Ariana Grande",
-        title: "the boy is mine",
-        duration: "2:58",
-        album: "eternal sunshine",
-        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
-    },
-    {
-        id: 7,
-        author: "Ariana Grande",
-        title: "yes, and?",
-        duration: "3:19",
-        album: "eternal sunshine",
-        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
-    },
-    {
-        id: 8,
-        author: "Ariana Grande",
-        title: "we can't be friends (wait for your love)",
-        duration: "3:35",
-        album: "eternal sunshine",
-        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
-    },
-    {
-        id: 9,
-        author: "Ariana Grande",
-        title: "i wish i hated you",
-        duration: "4:02",
-        album: "eternal sunshine",
-        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
-    },
-    {
-        id: 10,
-        author: "Ariana Grande",
-        title: "imperfect for you",
-        duration: "4:02",
-        album: "eternal sunshine",
-        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
-    },
-    {
-        id: 11,
-        author: "Ariana Grande",
-        title: "Hampstead",
-        duration: "3:29",
-        album: "eternal sunshine",
-        src: "https://cdn.freecodecamp.org/curriculum/js-music-player/hello-world.mp3"
-    },
-]
 const playButton = document.getElementById("play-button");
 const musicPlaylist = document.getElementById("playlist");
 const songTitle = document.getElementById("song-title");
 const artistName = document.getElementById("artist-name");
 const albumTitle = document.getElementById("album-title");
-
 const audio = new Audio();
 let currentSongIndex = 0;
 const previousButton = document.getElementById("previous-button");
 const nextButton = document.getElementById("next-button");
+const songListCurrent = [...songsList];
+
+function rerenderPlaylist(){
+    const refreshButton = document.getElementById("refresh-button");
+    refreshButton.addEventListener("click", () => {
+        songsList.push(...songListCurrent);
+        renderPlaylist();
+    });
+}
 
 function renderPlaylist (){
+
+    if (songsList.length === 0){
+        musicPlaylist.innerHTML = `
+        
+        <div class="flex flex-col w-full gap-2">
+            <hr class="border-gray-300">
+            <p class="text-white ">There are no songs in the playlist</p>
+            <button id="refresh-button" class="bg-gray-300 cursor-pointer rounded-lg flex w-34 h-8 justify-center items-center hover:bg-gray-400">Recharge playlist</button>
+            <img class="w-50 h-50" src=${illustration}></img>
+        </div>
+        `;
+
+        rerenderPlaylist();
+
+        return;
+    }
+
     musicPlaylist.innerHTML = songsList.map((music, index) => {
         return `
-        
            <hr class="border-gray-300">
             <article class="song-item flex justify-start align-top gap-2 cursor-pointer hover:bg-gray-700" data-index="${index}">
               <div>
@@ -130,21 +58,29 @@ function renderPlaylist (){
             </article>
         `;
     }).join("");
+
+  
 }
 
-renderPlaylist();
 
 function playSong(index){
     audio.src = songsList[index].src;
     audio.play();
 }
 
+function highlightSong(index){
+    document.querySelectorAll(".song-item").forEach((song) => song.classList.remove("bg-gray-700"));
+    document.querySelector(`.song-item[data-index="${index}"]`).classList.add("bg-gray-700");
+}
 
 function changeSong(index){
     songTitle.innerText = songsList[index].title;
     artistName.innerText = songsList[index].author;
     albumTitle.innerText = songsList[index].album;
 }
+
+
+renderPlaylist();
 
 playButton.addEventListener("click", () => {
     if (audio.paused){
@@ -184,22 +120,35 @@ musicPlaylist.addEventListener("click", (e) =>{
     playSong(currentSongIndex);
     changeSong(currentSongIndex);
 
-
     document.querySelectorAll(".song-item").forEach((song) => song.classList.remove("bg-gray-700"));
     article.classList.add("bg-gray-700");
 
-    const image = e.target.closest(".delete");
-    if (!image) return;
-
-    const index = parseInt(image.parentElement.dataset.index);
-    songsList.splice(index, 1);
-    article.remove();
-    renderPlaylist();
-    audio.pause();
+    const deleteArticle = e.target.closest(".delete");
+    if (!deleteArticle) return;
+    
+    if (deleteArticle){
+        const index = parseInt(deleteArticle.parentElement.dataset.index);
+        const wasIndex = index === currentSongIndex;
+        songsList.splice(index, 1);
+        article.remove();
+        renderPlaylist();
+    
+        if (wasIndex){
+            songTitle.innerText = "";
+            artistName.innerText = "";
+            albumTitle.innerText = "";
+        }
+        audio.pause();
+    }
 })
 
+audio.addEventListener("ended", () => {
+    if (currentSongIndex < songsList.length - 1){
+        currentSongIndex++;
+        playSong(currentSongIndex);
+        changeSong(currentSongIndex);
+        highlightSong(currentSongIndex)
+    }
+});
 
-function highlightSong(index){
-    document.querySelectorAll(".song-item").forEach((song) => song.classList.remove("bg-gray-700"));
-    document.querySelector(`.song-item[data-index="${index}"]`).classList.add("bg-gray-700");
-}
+
