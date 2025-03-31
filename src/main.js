@@ -118,13 +118,12 @@ function renderPlaylist (){
            <hr class="border-gray-300">
             <article class="song-item flex justify-start align-top gap-2 cursor-pointer hover:bg-gray-700" data-index="${index}">
               <div>
-                <p class="text-lg font-semibold text-gray-300">${music.id}</p>
+                <p class="text-lg font-semibold text-gray-300">${music.id + 1}</p>
               </div>
               <div>
                 <p class="text-base font-semibold text-gray-300">${music.title}</p>
                 <p class="text-sm font-mono text-gray-300">${music.author}</p>
               </div>
-              
               <div class="flex-1"></div>
                 <p class="text-sm font-mono text-gray-300">${music.duration}</p>
                 <img src="${trashIcon}" alt="delete" class="delete w-4 h-4 bg-gray-200 p-2 rounded-2xl text-red-600"></img>
@@ -135,19 +134,10 @@ function renderPlaylist (){
 
 renderPlaylist();
 
-
-
 function playSong(index){
     audio.src = songsList[index].src;
     audio.play();
 }
-
-function deleteSong(index){
-    
-}
-
-
-
 
 
 function changeSong(index){
@@ -172,7 +162,7 @@ previousButton.addEventListener("click", () => {
         currentSongIndex--;
         playSong(currentSongIndex);
         changeSong(currentSongIndex);
-
+        highlightSong(currentSongIndex)
     }
 });
 
@@ -181,7 +171,7 @@ nextButton.addEventListener("click", () => {
         currentSongIndex++;
         playSong(currentSongIndex);
         changeSong(currentSongIndex);
-
+        highlightSong(currentSongIndex)
     }
 });
 
@@ -205,4 +195,11 @@ musicPlaylist.addEventListener("click", (e) =>{
     songsList.splice(index, 1);
     article.remove();
     renderPlaylist();
+    audio.pause();
 })
+
+
+function highlightSong(index){
+    document.querySelectorAll(".song-item").forEach((song) => song.classList.remove("bg-gray-700"));
+    document.querySelector(`.song-item[data-index="${index}"]`).classList.add("bg-gray-700");
+}
