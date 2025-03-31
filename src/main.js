@@ -124,8 +124,7 @@ musicPlaylist.innerHTML = songsList.map((music, index) => {
           </div>
           
           <div class="flex-1"></div>
-                      <p class="text-sm font-mono text-gray-300">${music.duration}</p>
-
+            <p class="text-sm font-mono text-gray-300">${music.duration}</p>
         </article>
     `;
 }).join("");
