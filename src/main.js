@@ -1,6 +1,7 @@
 import imagePause from "./assets/icons/pause_track.svg";
 import imagePlay from "./assets/icons/play.svg";
 import trashIcon from "./assets/icons/trash_icons.svg";
+import illustration from "./assets/icons/meditation.svg";
 import { songsList } from "./songsList";
 
 const playButton = document.getElementById("play-button");
@@ -14,26 +15,28 @@ const previousButton = document.getElementById("previous-button");
 const nextButton = document.getElementById("next-button");
 const songListCurrent = [...songsList];
 
+function rerenderPlaylist(){
+    const refreshButton = document.getElementById("refresh-button");
+    refreshButton.addEventListener("click", () => {
+        songsList.push(...songListCurrent);
+        renderPlaylist();
+    });
+}
 
 function renderPlaylist (){
 
     if (songsList.length === 0){
         musicPlaylist.innerHTML = `
-        <div class="flex flex-col w-fit gap-2">
         
-        <p class="text-white ">There are no songs in the playlist</p>
-        <button id="refresh-button" class="bg-gray-400 cursor-pointer rounded-lg p-2">Recharge playlist</button>
-
+        <div class="flex flex-col w-full gap-2">
+            <hr class="border-gray-300">
+            <p class="text-white ">There are no songs in the playlist</p>
+            <button id="refresh-button" class="bg-gray-300 cursor-pointer rounded-lg flex w-34 h-8 justify-center items-center hover:bg-gray-400">Recharge playlist</button>
+            <img class="w-50 h-50" src=${illustration}></img>
         </div>
         `;
 
-        const refreshButton = document.getElementById("refresh-button");
-   
-        refreshButton.addEventListener("click", () => {
-            songsList.push(...songListCurrent);
-            renderPlaylist();
-    
-        });
+        rerenderPlaylist();
 
         return;
     }
@@ -59,9 +62,6 @@ function renderPlaylist (){
   
 }
 
-function rerenderPlaylist(){
-    renderPlaylist();
-}
 
 function playSong(index){
     audio.src = songsList[index].src;
