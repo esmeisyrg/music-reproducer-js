@@ -3,11 +3,11 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="icon" type="image/svg+xml" href="/public/favicon.ico" />
   <link rel="stylesheet" href="/styles/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Vite App</title>
+  <title>SongLists</title>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
 
   <section
     class="absolute top-0 z-[-2]  w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] grid place-items-center h-dvh">
-    <div class="w-[90%] md:w-[60%] lg:w-[40%] grid gap-8">
+    <div class="w-[90%] md:w-[60%] lg:w-[40%] grid gap-2">
       <section class="grid grid-cols-[auto_1fr] gap-4">
         <article class="rounded-md">
           <img class="bg-cover w-40 h-40" src="https://i.scdn.co/image/ab67616d00001e025ab3c842fde848df7a4ee6d9" alt="">
@@ -35,16 +35,16 @@
             <img id="play-button" src="./src/assets/icons/play.svg" class="w-10 h-10 cursor-pointer" alt="Pause icon">
             <img id="next-button" src="./src/assets/icons/next_track.svg" class="w-10 h-10 cursor-pointer"
               alt="Pause icon">
-
           </div>
 
         </article>
 
-
+        <div class="flex gap-3">
+          <img src="./src/assets/icons/playlist.svg" class="w-4 h-full" alt="Playlist icon">
+          <p id="artist-name" class="text-gray-300 text-balance font-medium">Playlist</p>
+        </div>
       </section>
       <section id="playlist" class="flex flex-col gap-1 justify-start h-[50vh] overflow-y-auto">
-
-
       </section>
     </div>
 

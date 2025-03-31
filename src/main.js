@@ -1,5 +1,6 @@
 import imagePause from "./assets/icons/pause_track.svg";
 import imagePlay from "./assets/icons/play.svg";
+import trashIcon from "./assets/icons/trash_icons.svg";
 
 const songsList = [
     {
@@ -110,27 +111,28 @@ let currentSongIndex = 0;
 const previousButton = document.getElementById("previous-button");
 const nextButton = document.getElementById("next-button");
 
+function renderPlaylist (){
+    musicPlaylist.innerHTML = songsList.map((music, index) => {
+        return `
+        
+           <hr class="border-gray-300">
+            <article class="song-item flex justify-start align-top gap-2 cursor-pointer hover:bg-gray-700" data-index="${index}">
+              <div>
+                <p class="text-lg font-semibold text-gray-300">${music.id + 1}</p>
+              </div>
+              <div>
+                <p class="text-base font-semibold text-gray-300">${music.title}</p>
+                <p class="text-sm font-mono text-gray-300">${music.author}</p>
+              </div>
+              <div class="flex-1"></div>
+                <p class="text-sm font-mono text-gray-300">${music.duration}</p>
+                <img src="${trashIcon}" alt="delete" class="delete w-4 h-4 bg-gray-200 p-2 rounded-2xl text-red-600"></img>
+            </article>
+        `;
+    }).join("");
+}
 
-musicPlaylist.innerHTML = songsList.map((music, index) => {
-    return `
-       <hr class="border-gray-300">
-        <article class="song-item flex justify-start align-top gap-2 cursor-pointer hover:bg-gray-700" data-index="${index}">
-          <div>
-            <p class="text-lg font-semibold text-gray-300">${music.id}</p>
-          </div>
-          <div>
-            <p class="text-base font-semibold text-gray-300">${music.title}</p>
-            <p class="text-sm font-mono text-gray-300">${music.author}</p>
-          </div>
-          
-          <div class="flex-1"></div>
-            <p class="text-sm font-mono text-gray-300">${music.duration}</p>
-        </article>
-    `;
-}).join("");
-
-
-
+renderPlaylist();
 
 function playSong(index){
     audio.src = songsList[index].src;
@@ -160,7 +162,7 @@ previousButton.addEventListener("click", () => {
         currentSongIndex--;
         playSong(currentSongIndex);
         changeSong(currentSongIndex);
-
+        highlightSong(currentSongIndex)
     }
 });
 
@@ -169,7 +171,7 @@ nextButton.addEventListener("click", () => {
         currentSongIndex++;
         playSong(currentSongIndex);
         changeSong(currentSongIndex);
-
+        highlightSong(currentSongIndex)
     }
 });
 
@@ -186,4 +188,18 @@ musicPlaylist.addEventListener("click", (e) =>{
     document.querySelectorAll(".song-item").forEach((song) => song.classList.remove("bg-gray-700"));
     article.classList.add("bg-gray-700");
 
+    const image = e.target.closest(".delete");
+    if (!image) return;
+
+    const index = parseInt(image.parentElement.dataset.index);
+    songsList.splice(index, 1);
+    article.remove();
+    renderPlaylist();
+    audio.pause();
 })
+
+
+function highlightSong(index){
+    document.querySelectorAll(".song-item").forEach((song) => song.classList.remove("bg-gray-700"));
+    document.querySelector(`.song-item[data-index="${index}"]`).classList.add("bg-gray-700");
+}
