@@ -30,8 +30,8 @@ function renderPlaylist (){
         
         <div class="flex flex-col w-full gap-2">
             <hr class="border-gray-300">
-            <p class="text-white ">There are no songs in the playlist</p>
-            <button id="refresh-button" class="bg-gray-300 cursor-pointer rounded-lg flex w-34 h-8 justify-center items-center hover:bg-gray-400">Recharge playlist</button>
+            <p class="text-white ">There are no songs in the playlist.</p>
+            <button id="refresh-button" class="bg-gray-300 cursor-pointer rounded-lg flex w-34 h-8 justify-center items-center hover:bg-gray-400">Refresh playlist</button>
             <img class="w-50 h-50" src=${illustration}></img>
         </div>
         `;
